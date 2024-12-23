@@ -1,0 +1,30 @@
+﻿@using App.Core
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <p>
+        INITIAL VALUE OF CONST NUMBER 1 : <span id="number1"> @Class1.Number1</span>
+    </p>
+    <p>
+        INITIAL VALUE OF READONLY NUMBER 2: <span id="number2"> @Class1.Number2</span>
+    </p>
+    <button id="getNumbers">Get numbers</button>
+</main>
+
+@section scripts{
+    <script type="text/javascript">
+
+    const getNumbersUrl = "@Url.Action("GetNumbers","Home")";
+
+    $(document).ready(function () {
+        $("#getNumbers").click(function () {
+            $.get(getNumbersUrl, function (data, status) {
+                $("main").append("<p>Number 1 : " + data.Number1 + ", Number 2 : " + data.Number2 + "</p>");
+            });
+        });
+    });
+    </script>
+
+}
